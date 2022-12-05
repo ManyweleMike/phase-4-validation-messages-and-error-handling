@@ -22,11 +22,14 @@ function MovieForm() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((newMovie) => console.log(newMovie))
+      } else {
+        response.json().then((errorData) => setErrors(errorData.errors))
+      }
     })
-      .then((response) => response.json())
-      .then((newMovie) => console.log(newMovie));
   }
-
   function handleChange(e) {
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
